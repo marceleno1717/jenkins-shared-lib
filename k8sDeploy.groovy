@@ -1,6 +1,6 @@
 def call(String imageName, String newTag, String deploymentFile) {
     sh """
-    sed -i 's|image: ${imageName}:.*|image: ${imageName}:${newTag}|' ${deploymentFile}"
+    sed -i 's|image: ${imageName}:.*|image: ${imageName}:${newTag}|' ${deploymentFile}
 
     kubectl apply -f ${deploymentFile}
 
