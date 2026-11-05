@@ -11,6 +11,8 @@ def call(String imageName, String newTag, String deploymentFile, String githubCr
 
             git add ${deploymentFile}
             git commit -m "Update deployment image to ${imageName}:${newTag}!"
+
+            echo "pushing to ${repo}..."
             git push https://${GITHUB_USERNAME}:${GITHUB_PASSWORD}@${repo} HEAD:main
         """
     }
