@@ -5,6 +5,7 @@ def call(String imageName, String newTag, String deploymentFile, String githubCr
     ]){
         sh """
             sed -i 's|image: ${imageName}:.*|image: ${imageName}:${newTag}|' ${deploymentFile}
+            echo "pushing to ${repo}..."
 
             git config user.email ${email}
             git config user.name ${GITHUB_USERNAME}
@@ -12,7 +13,6 @@ def call(String imageName, String newTag, String deploymentFile, String githubCr
             git add ${deploymentFile}
             git commit -m "Update deployment image to ${imageName}:${newTag}!"
 
-            echo "pushing to ${repo}..."
             git push https://${GITHUB_USERNAME}:${GITHUB_PASSWORD}@${repo} HEAD:main
         """
     }
